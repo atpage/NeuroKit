@@ -897,10 +897,10 @@ def _ecg_findpeaks_zong(signal, sampling_rate=1000, cutoff=16, window=0.13, **kw
 
     # Find adaptive threshold
     window_size = 10 * sampling_rate
+    window_size = _to_int(window_size)
 
     # Apply fast moving window average with 1D convolution
 
-    window_size = _to_int(window_size)
     ret = np.pad(clt, (window_size - 1, 0), "constant", constant_values=(0, 0))
     ret = np.convolve(ret, np.ones(window_size), "valid")
 
